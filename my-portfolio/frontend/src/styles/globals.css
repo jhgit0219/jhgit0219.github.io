@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap");
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@keyframes smokeOverlay {
+  0% {
+    background-position: 0% 0%;
+    opacity: 0.15;
+  }
+  25% {
+    background-position: 40% 10%;
+    opacity: 0.25;
+  }
+  50% {
+    background-position: 80% 50%;
+    opacity: 0.3;
+  }
+  75% {
+    background-position: 40% 10%;
+    opacity: 0.25;
+  }
+  100% {
+    background-position: 0% 0%;
+    opacity: 0.15;
+  }
+}
+
+.animate-smoke-overlay {
+  animation: smokeOverlay 45s ease-in-out infinite;
+}

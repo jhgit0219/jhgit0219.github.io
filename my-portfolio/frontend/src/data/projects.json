@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "TBD",
+    "description": "A simple pixel drawing web application. EST June 2025",
+    "image": "/images/project-1.png",
+    "links": {
+      "demo": "#",
+      "github": "#"
+    },
+    "reverse": false
+  },
+  {
+    "id": 2,
+    "title": "TBD",
+    "description": "Secure chat app with WebSockets, JWT auth, and MongoDB.",
+    "image": "/images/project-2.png",
+    "links": {
+      "demo": "#",
+      "github": "#"
+    },
+    "reverse": true
+  }
+]
