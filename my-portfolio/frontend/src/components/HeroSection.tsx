@@ -51,15 +51,15 @@ export default function HeroSection({
         className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
       />
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 w-full items-center">
-        <div className="text-left ml-24">
-          <span className="text-2xl md:text-3xl text-red-400 font-semibold mb-0 block leading-tight">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 w-full items-center px-6 md:px-0">
+        <div className="text-left ml-0 md:ml-24">
+          <span className="text-xl sm:text-2xl md:text-3xl text-red-400 font-semibold block leading-tight">
             Hello, I’m
           </span>
-          <h1 className="text-8xl md:text-8xl font-extrabold uppercase bg-gradient-to-r from-red-600 via-red-400 to-red-600 text-transparent bg-clip-text tracking-wider mb-4">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold uppercase bg-gradient-to-r from-red-600 via-red-400 to-red-600 text-transparent bg-clip-text tracking-wider mb-4">
             JETCHOMEN
           </h1>
-          <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
             I&rsquo;m an experienced full stack developer specializing in
             scalable web apps, automation systems, and enterprise solutions
             using React, Spring Boot, and PEGA.

@@ -13,7 +13,7 @@ export default function ScrollReveal({
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "center center"],
+    offset: ["start end", "start 70%"],
   });
 
   // Scroll range: 0 (just entering) → 1 (fully centered in viewport)

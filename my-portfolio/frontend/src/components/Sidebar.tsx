@@ -27,10 +27,10 @@ export default function Sidebar({
   const top = useTransform(scrollY, [disappearY, appearY], ["90%", "45%"]);
 
   return (
-    <div className="fixed top-0 left-0 w-24 md:w-28 h-screen z-50 pointer-events-none">
+    <div className="hidden md:block md:fixed md:top-0 md:left-0 md:w-28 md:h-screen md:z-50 md:pointer-events-none">
       <motion.div
         style={{ opacity }}
-        className="absolute inset-0 bg-red-500/10 backdrop-blur-md border-r border-red-400/30 pointer-events-none"
+        className="absolute inset-0 bg-red-500/10 backdrop-blur-md border-none pointer-events-none"
       />
       <motion.div
         style={{ top, opacity }}
