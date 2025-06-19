@@ -6,6 +6,7 @@ import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
 import ContactSection from "@/components/ContactSection";
 import ScrollSection from "@/components/ScrollSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const featureRef = useRef<HTMLElement | null>(null);
@@ -72,6 +73,7 @@ export default function Home() {
             <ContactSection />
           </section>
         </ScrollSection>
+        <Footer />
       </main>
     </>
   );

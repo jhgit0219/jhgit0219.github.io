@@ -45,10 +45,6 @@ export default function ContactSection() {
           </button>
         </form>
       </div>
-
-      <div className="mt-24 border-t border-red-500/20 pt-8 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Jetchomen Husain. All rights reserved.
-      </div>
     </section>
   );
 }

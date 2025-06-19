@@ -60,9 +60,9 @@ export default function HeroSection({
             JETCHOMEN
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
-            I'm an experienced full stack developer specializing in scalable web
-            apps, automation systems, and enterprise solutions using React,
-            Spring Boot, and PEGA.
+            I&rsquo;m an experienced full stack developer specializing in
+            scalable web apps, automation systems, and enterprise solutions
+            using React, Spring Boot, and PEGA.
           </p>
 
           <a

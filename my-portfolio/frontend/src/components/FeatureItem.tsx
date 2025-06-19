@@ -1,11 +1,12 @@
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
+import { Project } from "@/class/project";
 
 export default function FeatureItem({
   project,
   reverse,
 }: {
-  project: any;
+  project: Project;
   reverse: boolean;
 }) {
   const { title, description, image, links } = project;
