@@ -9,7 +9,7 @@ export default function FeatureSection() {
     >
       <div className="max-w-4xl mx-auto text-center text-gray-300 space-y-4">
         <h1 className="text-6xl font-semibold text-white">FEATURED PROJECTS</h1>
-        <p className="text-2xl text-gray-400">
+        <p className="text-2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                xl text-gray-400">
           A curated selection of things I’ve built recently — focused on design,
           interactivity, and performance.
         </p>

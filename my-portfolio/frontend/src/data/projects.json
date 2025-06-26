@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "title": "TBD",
-    "description": "A simple pixel drawing web application. EST June 2025",
-    "image": "/images/project-1.png",
+    "title": "MonoPixel",
+    "description": "MonoPixel is a minimalist pixel drawing web app built with Next.js and TypeScript. It features a dynamic zoomable canvas (8x8 to 128x128), smooth UI controls, and an efficient state system—perfect for prototyping pixel art.",
+    "image": "/images/monopixel.png",
     "links": {
-      "demo": "#",
-      "github": "#"
+      "demo": "https://mono-pixel-app.vercel.app/",
+      "github": "https://github.com/jhgit0219/mono-pixel-app"
     },
     "reverse": false
   },
