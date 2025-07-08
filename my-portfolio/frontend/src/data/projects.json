@@ -1,23 +1,23 @@
 [
   {
     "id": 1,
+    "title": "JFlix",
+    "description": "JFlix is a full-stack Netflix clone with a Node.js (Express) backend and an Angular frontend built in TypeScript. It features Firebase Google authentication, TMDB-powered movie data, MongoDB for user preferences, and sleek horizontal scrolling movie sections styled with Tailwind CSS.",
+    "image": "/images/jflix.png",
+    "links": {
+      "demo": "https://jflix-app.vercel.app/",
+      "github": "https://github.com/jhgit0219/jflix-app"
+    },
+    "reverse": false
+  },
+  {
+    "id": 2,
     "title": "MonoPixel",
     "description": "MonoPixel is a minimalist pixel drawing web app built with Next.js and TypeScript. It features a dynamic zoomable canvas (8x8 to 128x128), smooth UI controls, and an efficient state system—perfect for prototyping pixel art.",
     "image": "/images/monopixel.png",
     "links": {
       "demo": "https://mono-pixel-app.vercel.app/",
       "github": "https://github.com/jhgit0219/mono-pixel-app"
-    },
-    "reverse": false
-  },
-  {
-    "id": 2,
-    "title": "TBD",
-    "description": "Secure chat app with WebSockets, JWT auth, and MongoDB.",
-    "image": "/images/project-2.png",
-    "links": {
-      "demo": "#",
-      "github": "#"
     },
     "reverse": true
   }
