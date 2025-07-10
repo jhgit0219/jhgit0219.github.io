@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "JFlix",
+    "title": "JFlix (In Progress)",
     "description": "JFlix is a full-stack Netflix clone with a Node.js (Express) backend and an Angular frontend built in TypeScript. It features Firebase Google authentication, TMDB-powered movie data, MongoDB for user preferences, and sleek horizontal scrolling movie sections styled with Tailwind CSS.",
     "image": "/images/jflix.png",
     "links": {
