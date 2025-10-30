@@ -16,7 +16,7 @@
     "description": "An advanced AI-powered video generation application that creates videos from text prompts or images. This local-deployment project showcases machine learning capabilities for automated video content creation.",
     "image": "/images/ai-video-generator.png",
     "links": {
-      "demo": "",
+      "demo": "https://github.com/jhgit0219/ai-video-generator",
       "github": "https://github.com/jhgit0219/ai-video-generator"
     },
     "reverse": true
@@ -25,7 +25,7 @@
     "id": 3,
     "title": "JChat",
     "description": "JChat is an intelligent chatbot website that provides interactive conversational experiences. Built with modern web technologies, it offers real-time messaging capabilities and AI-powered responses for engaging user interactions.",
-    "image": "/images/jchat.png",
+    "image": "/images/ai-chatbot.png",
     "links": {
       "demo": "https://ai-chatbot-ochre-eta.vercel.app/",
       "github": "https://github.com/jhgit0219/ai-chatbot"
