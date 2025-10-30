@@ -12,6 +12,28 @@
   },
   {
     "id": 2,
+    "title": "AI Video Generator",
+    "description": "An advanced AI-powered video generation application that creates videos from text prompts or images. This local-deployment project showcases machine learning capabilities for automated video content creation.",
+    "image": "/images/ai-video-generator.png",
+    "links": {
+      "demo": "",
+      "github": "https://github.com/jhgit0219/ai-video-generator"
+    },
+    "reverse": true
+  },
+  {
+    "id": 3,
+    "title": "JChat",
+    "description": "JChat is an intelligent chatbot website that provides interactive conversational experiences. Built with modern web technologies, it offers real-time messaging capabilities and AI-powered responses for engaging user interactions.",
+    "image": "/images/jchat.png",
+    "links": {
+      "demo": "https://ai-chatbot-ochre-eta.vercel.app/",
+      "github": "https://github.com/jhgit0219/ai-chatbot"
+    },
+    "reverse": false
+  },
+  {
+    "id": 4,
     "title": "MonoPixel",
     "description": "MonoPixel is a minimalist pixel drawing web app built with Next.js and TypeScript. It features a dynamic zoomable canvas (8x8 to 128x128), smooth UI controls, and an efficient state system—perfect for prototyping pixel art.",
     "image": "/images/monopixel.png",
