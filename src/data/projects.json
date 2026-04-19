@@ -1,0 +1,360 @@
+[
+  {
+    "id": 1,
+    "slug": "ai-video-generator",
+    "kind": "product",
+    "title": "AI Video Generator",
+    "description": "A local video pipeline that turns a narrated script into a fully edited clip by scraping reference images, ranking them with CLIP, and composing with FFmpeg.",
+    "longDescription": "This is a local video generation pipeline, not a diffusion app. Given a JSON script plus narration audio, it scrapes reference images from Google with a Playwright-based scraper (proxy rotation and CAPTCHA handling built in), re-ranks them with OpenAI CLIP for semantic fit, auto-frames faces with YOLO11x segmentation, then composes the final MP4 in MoviePy and FFmpeg using hardware encoders (NVENC, AMF, QSV). A local Ollama LLM plans cinematic effects per segment from a 24-effect library, and Real-ESRGAN handles upscaling. The UI is Gradio, running on the local machine.",
+    "image": "/images/ai-video-generator.png",
+    "links": {
+      "demo": "https://github.com/jhgit0219/ai-video-generator",
+      "github": "https://github.com/jhgit0219/ai-video-generator"
+    },
+    "tags": ["Python", "PyTorch", "CLIP", "YOLO", "Ollama", "Playwright", "FFmpeg", "Gradio"],
+    "reverse": false,
+    "role": "Solo ML and pipeline engineer",
+    "year": "2025",
+    "status": "live",
+    "highlights": [
+      "Playwright scraper for Google Images with proxy rotation, CAPTCHA handling, and scroll pacing.",
+      "CLIP-based semantic re-ranking of scraped images to drop off-topic results before editing.",
+      "YOLO11x segmentation for face-anchored framing so subjects stay centered through cuts.",
+      "Ollama-driven effects director picking from a 24-effect cinematic library per segment.",
+      "Hardware-accelerated 1080p encoding (NVENC, AMF, QSV) with parallel chunk rendering."
+    ],
+    "techStack": [
+      { "label": "ML and CV", "items": ["PyTorch", "CLIP", "YOLO11x-seg", "Real-ESRGAN", "spaCy"] },
+      { "label": "LLM", "items": ["Ollama", "llama3", "deepseek-coder"] },
+      { "label": "Scraping", "items": ["Playwright", "Proxy rotation"] },
+      { "label": "Video", "items": ["MoviePy", "FFmpeg", "NVENC"] },
+      { "label": "Interface", "items": ["Gradio"] }
+    ],
+    "challenges": [
+      "Google image scraping broke often due to CAPTCHAs and anti-bot measures. The fix was a manual or retry fallback path layered on top of proxy rotation, so a failed batch could be rescued without restarting.",
+      "CLIP sometimes ranked visually similar but topically wrong images highly. Adding a re-query step with a sharper prompt when the top score fell below a threshold recovered most misses.",
+      "Panning across images of different resolutions produced black bars. A uniform-scale normalization before panning kept the framing consistent."
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "multi-agent-dev-platform",
+    "kind": "product",
+    "title": "Multi-Agent Dev Platform",
+    "description": "A standards-driven orchestrator that coordinates Feature, Dev, Test, Security, and DevOps agents through a shared JSON workflow, with a live React dashboard.",
+    "longDescription": "A multi-agent orchestrator that drives software development through five team agents: Feature, Dev, Test, Security, and DevOps. Each agent produces a structured JSON report (backlog, dev report, test report, security audit, deploy report) and shares state through a common workflow. A React plus Vite dashboard subscribes to a WebSocket bridge for live progress, and a standards directory organizes the conventions each agent must follow for databases, frontends, backends, testing, security, documentation, and devops. Provider-abstracted over Claude, OpenAI, and Ollama.",
+    "image": "/images/multi-agent-dev-platform.png",
+    "links": {
+      "github": "https://github.com/jhgit0219/multi-agent-dev-platform"
+    },
+    "tags": ["TypeScript", "Multi-Agent", "Orchestration", "React", "Vite", "WebSocket"],
+    "reverse": true,
+    "status": "in-progress",
+    "role": "Creator and sole maintainer",
+    "year": "2026",
+    "highlights": [
+      "Five specialized team agents (Feature, Dev, Test, Security, DevOps) producing typed JSON reports.",
+      "Zod-validated config and a provider abstraction over Claude, OpenAI, and Ollama.",
+      "React plus Vite dashboard subscribed to a WebSocket bridge for live phase progress.",
+      "Standards tree codifying conventions per domain so every agent reads from one source of truth."
+    ],
+    "techStack": [
+      { "label": "Orchestrator", "items": ["TypeScript", "Node.js", "Zod"] },
+      { "label": "Dashboard", "items": ["React", "Vite"] },
+      { "label": "Bridge", "items": ["Express", "WebSocket"] },
+      { "label": "Testing", "items": ["Vitest", "Playwright"] }
+    ],
+    "challenges": [
+      "Phase boundaries used to hide regressions: an agent would declare done and the next phase would inherit broken state. Mandatory smoke tests after each phase (lint, typecheck, build, start) made drift impossible to hide.",
+      "Mixing LLM providers without leaking provider-specific assumptions into agent logic required a provider abstraction with a single typed interface and configuration through Zod."
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "codingquest",
+    "kind": "product",
+    "title": "CodingQuest",
+    "description": "A self-hosted coding practice platform that runs Python entirely in the browser via Pyodide, with a FastAPI backend for problems, submissions, and auth.",
+    "longDescription": "CodingQuest is a coding-practice platform. Problems and submissions live on a FastAPI and Postgres backend, while the actual Python code runs inside the browser through Pyodide. That means no server-side code execution sandbox is needed. The frontend is React, Vite, Monaco for the editor, Zustand for state, and TanStack Query for server data. Authentication supports multiple modes and there is an admin UI for problem authoring. Everything is packaged for Docker Compose.",
+    "image": "/images/codingquest.png",
+    "links": {
+      "github": "https://github.com/jhgit0219/codingquest"
+    },
+    "tags": ["React", "Vite", "Monaco", "Pyodide", "FastAPI", "Postgres", "Zustand"],
+    "reverse": false,
+    "status": "in-progress",
+    "role": "Solo full-stack developer",
+    "year": "2026",
+    "highlights": [
+      "Python code runs fully client-side via Pyodide and WebAssembly, so there is no server-side code execution path to secure.",
+      "Monaco editor paired with TanStack Query for problem state and Zustand for UI state.",
+      "Alembic-backed Postgres for problems, submissions, and user data.",
+      "Admin UI for authoring and editing problems."
+    ],
+    "techStack": [
+      { "label": "Frontend", "items": ["React", "Vite", "TypeScript", "Monaco", "TanStack Query", "Zustand"] },
+      { "label": "Browser runtime", "items": ["Pyodide", "WebAssembly"] },
+      { "label": "Backend", "items": ["FastAPI", "Alembic", "PostgreSQL"] },
+      { "label": "Ops", "items": ["Docker Compose"] }
+    ],
+    "challenges": [
+      "Bootstrapping Pyodide in the browser takes several seconds on first load. Locking the UI behind a clear loading state and caching the runtime between pages made the cost only happen once per session.",
+      "Keeping the editor, submission state, and server data in sync without duplicate sources of truth meant splitting TanStack Query (server data) from Zustand (UI state) on principle, not by convenience."
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "jchat",
+    "kind": "product",
+    "title": "JChat",
+    "description": "A multi-personality AI chatbot with a Redis-backed job queue, a Node worker calling the Hugging Face API, and WebSocket push to the frontend.",
+    "longDescription": "JChat is a queued chat app, not a direct streaming one. The Next.js and React frontend sends messages to an Express and WebSocket backend, which pushes them into a Redis queue. A background Node worker pulls messages off the queue, calls the Hugging Face Inference API for the selected personality (Assistant, Luna, or Alex), stores the response in Redis history, and publishes to a per-session channel. The WebSocket relays the finished response back to the originating client. Session IDs are UUIDs kept in localStorage; conversation history lives in Redis.",
+    "image": "/images/ai-chatbot.png",
+    "links": {
+      "demo": "https://ai-chatbot-ochre-eta.vercel.app/",
+      "github": "https://github.com/jhgit0219/ai-chatbot"
+    },
+    "tags": ["Next.js", "Express", "WebSocket", "Redis", "Hugging Face", "TypeScript"],
+    "reverse": true,
+    "role": "Solo full-stack developer",
+    "year": "2025",
+    "status": "live",
+    "highlights": [
+      "Three configurable AI personalities selected by per-personality system prompts.",
+      "Redis-backed job queue decoupling the request path from the model call.",
+      "Dedicated Node worker so Hugging Face API latency never blocks the web layer.",
+      "Per-session Redis pub/sub channels relayed to the client over WebSocket."
+    ],
+    "techStack": [
+      { "label": "Frontend", "items": ["Next.js 15", "React 19", "TypeScript", "Tailwind", "Socket.IO Client"] },
+      { "label": "Backend", "items": ["Express", "ws", "ioredis", "TypeScript"] },
+      { "label": "Infrastructure", "items": ["Redis", "Hugging Face Inference API", "Vercel"] }
+    ],
+    "challenges": [
+      "Direct HTTP to the model API coupled request latency to the chat UI. Moving the call behind a queue plus a worker kept the frontend responsive even when the provider throttled.",
+      "Routing worker responses back to the right client meant session-scoped pub/sub channels plus WebSocket subscription bookkeeping on reconnect."
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "jflix",
+    "kind": "product",
+    "title": "JFlix",
+    "description": "A Netflix-style streaming browser built on Angular 17 with Signals, an Express backend, and TMDB for movie and TV data.",
+    "longDescription": "JFlix recreates a Netflix-style browse experience end-to-end. The frontend is Angular 17 using standalone components and Signals for reactive state, styled with Tailwind. The backend is a small Node and Express service sitting in front of MongoDB Atlas. Authentication is handled by Firebase, while TMDB provides the actual movie and TV catalog. I built this to practice wiring a single-page app to a real REST backend plus multiple third-party APIs without leaning entirely on a managed platform.",
+    "image": "/images/jflix.png",
+    "links": {
+      "demo": "https://jflix-app.vercel.app/",
+      "github": "https://github.com/jhgit0219/jflix-app"
+    },
+    "tags": ["Angular", "Signals", "Node.js", "Express", "MongoDB", "Firebase", "TMDB", "Tailwind CSS"],
+    "reverse": false,
+    "role": "Solo full-stack developer",
+    "year": "2025",
+    "status": "in-progress",
+    "highlights": [
+      "Angular Signals driving reactive state instead of RxJS observable state.",
+      "Combined movies and TV search with debounced input and infinite scroll.",
+      "Hover previews and SVG image fallbacks for missing poster art.",
+      "Firebase authentication on top of a custom Express backend."
+    ],
+    "techStack": [
+      { "label": "Frontend", "items": ["Angular 17", "TypeScript", "Signals", "Tailwind CSS"] },
+      { "label": "Backend", "items": ["Node.js", "Express", "MongoDB"] },
+      { "label": "Infrastructure", "items": ["Firebase Auth", "TMDB API", "Vercel"] }
+    ],
+    "challenges": [
+      "Search needed to combine movies and TV results from separate TMDB endpoints without blocking the UI. The fix was debounced input plus parallel fetches merged client-side.",
+      "Missing poster art made the grid look broken. Replacing failed image loads with generated SVG placeholders kept the layout consistent."
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "stock-market-trend-dashboard",
+    "kind": "product",
+    "title": "Stock Market Trend Dashboard",
+    "description": "A dark-mode grid of 10-year trend charts built on TradingView Lightweight Charts, with a draggable layout and a FastAPI backend.",
+    "longDescription": "A stock trend dashboard that renders 10-year price charts for a user-picked set of tickers in a draggable 5-by-2 grid. The frontend is React, TypeScript, and Vite using TradingView Lightweight Charts for rendering and dnd-kit for the drag-to-reorder layout. The FastAPI backend ships bundled mock data by default; live data is optional via an Alpha Vantage API key. Everything runs in Docker Compose locally and deploys to Vercel.",
+    "image": "/images/stock-market-trend-dash.png",
+    "links": {
+      "demo": "https://stock-market-trend-dash-git-master-jhgit0219s-projects.vercel.app/",
+      "github": "https://github.com/jhgit0219/stock-market-trend-dash"
+    },
+    "tags": ["React", "TypeScript", "Vite", "TradingView", "FastAPI", "Python", "Docker"],
+    "reverse": true,
+    "status": "live",
+    "role": "Solo full-stack developer",
+    "year": "2026",
+    "highlights": [
+      "10-year trend charts via TradingView Lightweight Charts, chosen for their render performance over custom SVG.",
+      "Searchable side panel with checkbox selection, overflow scrolling past the first ten picks.",
+      "Draggable 5-by-2 grid powered by dnd-kit so the layout follows the user's priorities.",
+      "Bundled mock dataset for offline use, with Alpha Vantage as an optional live provider."
+    ],
+    "techStack": [
+      { "label": "Frontend", "items": ["React 18", "TypeScript", "Vite", "Lightweight Charts", "dnd-kit"] },
+      { "label": "Backend", "items": ["FastAPI", "Python 3.12"] },
+      { "label": "Ops", "items": ["Docker Compose", "Vercel"] }
+    ],
+    "challenges": [
+      "Reordering charts while maintaining their rendered state required holding chart instances stable across drag events rather than remounting them on reorder.",
+      "Offering both offline mock mode and live Alpha Vantage mode without branching the UI meant the backend normalizes both sources into the same shape before serving."
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "game-launcher",
+    "kind": "product",
+    "title": "Game Launcher",
+    "description": "A Windows desktop app that scans configured game directories, tracks play sessions, and supports custom non-Steam shortcuts. Electron, React, SQLite.",
+    "longDescription": "A Windows game library launcher built as an Electron app. It scans a list of configured directories for installed games, tracks play sessions locally, and supports adding custom non-Steam shortcuts. The renderer is React plus Vite plus TypeScript, the main process uses better-sqlite3 for local storage, and the app ships as an NSIS installer via electron-builder.",
+    "image": "/images/game-launcher.png",
+    "links": {
+      "github": "https://github.com/jhgit0219/game-launcher"
+    },
+    "tags": ["Electron", "React", "Vite", "TypeScript", "SQLite"],
+    "reverse": false,
+    "status": "in-progress",
+    "role": "Solo desktop developer",
+    "year": "2026",
+    "highlights": [
+      "Scans configured directories for installed games and adds them to a local library.",
+      "Play session tracking so the launcher remembers what was played and when.",
+      "Custom shortcut support for non-Steam games.",
+      "Packaged as a Windows NSIS installer via electron-builder."
+    ],
+    "techStack": [
+      { "label": "App", "items": ["Electron", "React", "Vite", "TypeScript"] },
+      { "label": "Storage", "items": ["better-sqlite3"] },
+      { "label": "Packaging", "items": ["electron-builder", "NSIS"] }
+    ],
+    "challenges": [
+      "Scanning thousands of files on startup froze the UI. Moving directory scans off the renderer into the main process and streaming results back over IPC fixed it.",
+      "Tracking play sessions reliably meant hooking into process lifecycle events rather than polling, so the launcher knows the exact moment a game exits."
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "monopixel",
+    "kind": "product",
+    "title": "MonoPixel",
+    "description": "A minimalist pixel editor in Next.js with a Zustand store holding the canvas state outside React so brush strokes do not trigger re-renders.",
+    "longDescription": "MonoPixel is a small Next.js and TypeScript pixel editor built over a weekend. The canvas state lives in a Zustand store outside React's render tree, so drawing does not rerun component trees. The UI is split into a topbar, toolbar, canvas view, navigator mini-map, zoom controls, and a canvas-size dialog. The goal was a clean focused editor, not a feature-complete art tool.",
+    "image": "/images/monopixel.png",
+    "links": {
+      "demo": "https://mono-pixel-app.vercel.app/",
+      "github": "https://github.com/jhgit0219/mono-pixel-app"
+    },
+    "tags": ["Next.js", "React", "TypeScript", "Zustand", "Canvas", "Tailwind"],
+    "reverse": true,
+    "status": "live",
+    "role": "Solo frontend developer",
+    "year": "2025",
+    "highlights": [
+      "Canvas state held in a Zustand store outside React so brush strokes do not rerender the tree.",
+      "Split UI: topbar, toolbar, canvas view, navigator mini-map, and zoom controls.",
+      "Configurable canvas size via a dedicated dialog.",
+      "No backend: everything runs in the browser."
+    ],
+    "techStack": [
+      { "label": "Frontend", "items": ["Next.js 15", "React 19", "TypeScript", "Zustand", "Canvas API"] },
+      { "label": "Styling", "items": ["Tailwind CSS 4"] },
+      { "label": "Hosting", "items": ["Vercel"] }
+    ],
+    "challenges": [
+      "Naive React rerenders on every stroke would kill frame rate on larger canvases. Moving the entire canvas state into Zustand and updating only the visible surface kept drawing smooth.",
+      "Splitting the editor into distinct panels (toolbar, topbar, navigator) without tangling their state required each panel to subscribe to narrow slices of the store rather than reading the whole state tree."
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "audio-transcriber",
+    "kind": "lab",
+    "title": "audio-transcriber",
+    "description": "Self-hosted audio transcription API. faster-whisper for speech, PANNs for sound events, Redis-backed job queue with SSE streaming for progress.",
+    "longDescription": "A self-hosted audio transcription service. Uploads are queued in Redis and picked up by a worker that runs faster-whisper for speech plus PANNs for environmental sound event detection. The API streams progress updates back to the client via server-sent events rather than returning a single large blob at the end. Packaged for Docker Compose, CUDA-accelerated when available.",
+    "links": {
+      "github": "https://github.com/jhgit0219/audio-transcriber"
+    },
+    "tags": ["Python", "FastAPI", "faster-whisper", "PANNs", "Redis", "Docker", "SSE"],
+    "reverse": false,
+    "status": "in-progress",
+    "role": "Solo backend engineer",
+    "year": "2026",
+    "language": "Python",
+    "highlights": [
+      "faster-whisper for speech transcription with CUDA acceleration when available.",
+      "PANNs sound event detection so output includes non-speech sounds (applause, music, etc.).",
+      "Redis job queue so long uploads do not block the HTTP layer.",
+      "Server-sent events stream progress to the client instead of polling."
+    ],
+    "techStack": [
+      { "label": "API", "items": ["Python", "FastAPI", "SSE"] },
+      { "label": "ML", "items": ["faster-whisper", "PANNs", "PyTorch"] },
+      { "label": "Infrastructure", "items": ["Redis", "Docker Compose"] }
+    ],
+    "challenges": [
+      "Long transcription jobs over HTTP would time out behind proxies. Moving progress to SSE and keeping the final transcript in Redis for retrieval solved both ends of the problem.",
+      "GPU warmups cost seconds per cold start. Keeping the worker resident and the model loaded between jobs amortized that cost across many requests."
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "nba-stats",
+    "kind": "lab",
+    "title": "NBA Stats Pipeline",
+    "description": "An XGBoost-based NBA margin predictor with quarter-level models, betting odds integration, and a planned FastAPI + React interface.",
+    "longDescription": "A data and modeling pipeline for NBA game outcomes. Ingests games, players, coaches, per-quarter stats, and sportsbook odds. Trains an XGBRegressor on roughly 169 features to predict home-team margin, then calibrates a sigmoid over it for win probability. Quarter-level models (Q1 through Q4) run alongside the full-game model. A bet-result table and HTML viewer let me compare predicted vs actual outcomes. The FastAPI backend and React frontend are designed but not yet wired; right now it runs from scripts.",
+    "links": {},
+    "tags": ["Python", "XGBoost", "pandas", "FastAPI (planned)", "React (planned)"],
+    "reverse": true,
+    "status": "local",
+    "role": "Solo data and ML engineer",
+    "year": "2026",
+    "language": "Python",
+    "highlights": [
+      "169-feature XGBRegressor predicting home-team margin per game.",
+      "Quarter-level sub-models (Q1, Q2, Q3, Q4) trained separately alongside the full-game model.",
+      "Calibrated sigmoid converting predicted margin into a win probability.",
+      "Odds integration (bet365, 1xBet, Betfair Exchange) plus a bet-results table for backtesting."
+    ],
+    "techStack": [
+      { "label": "Modeling", "items": ["XGBoost", "scikit-learn", "pandas", "NumPy"] },
+      { "label": "Data", "items": ["Ingestion pipeline", "PostgreSQL (planned)"] },
+      { "label": "Interface (planned)", "items": ["FastAPI", "React"] }
+    ],
+    "challenges": [
+      "Feature engineering across games, players, coaches, and per-quarter stats required a strict ingestion schema so new seasons could be added without rewriting downstream models.",
+      "Calibration: raw margin predictions are not probabilities. Fitting a sigmoid over a held-out set produced calibrated win probabilities that actually compared to implied odds."
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "tennis-predictor",
+    "kind": "lab",
+    "title": "Tennis Match Predictor",
+    "description": "A tennis outcome modeling pipeline, same shape as the NBA predictor. Data ingestion, feature engineering, model training, all script-driven.",
+    "longDescription": "A data-and-model project for tennis match outcomes, following the same pattern as the NBA work: ingestion scripts pull match data, feature engineering builds per-player rolling features, and a trained model predicts the winner and margin. No UI yet; everything runs from scripts. Structured the same way as nba-stats so the tooling is reusable across sports.",
+    "links": {},
+    "tags": ["Python", "pandas", "scikit-learn", "XGBoost"],
+    "reverse": false,
+    "status": "local",
+    "role": "Solo data and ML engineer",
+    "year": "2026",
+    "language": "Python",
+    "highlights": [
+      "Per-player rolling feature engineering (recent form, surface splits, head-to-head).",
+      "Shared ingestion pattern with nba-stats so adding a new sport is structural, not bespoke.",
+      "Script-driven workflow: ingest, train, evaluate, predict, all CLI-invoked.",
+      "Kept local while the feature set stabilizes."
+    ],
+    "techStack": [
+      { "label": "Modeling", "items": ["XGBoost", "scikit-learn", "pandas"] },
+      { "label": "Tooling", "items": ["Python", "CLI"] }
+    ],
+    "challenges": [
+      "Tennis match data is sparser per player than team sports. Bootstrapping per-surface features from rolling windows, rather than season averages, cut variance without losing signal.",
+      "Reusing the nba-stats ingestion skeleton forced a cleaner generic layer, since tennis entities (players, matches, surfaces) do not map one-to-one onto team-sport entities."
+    ]
+  }
+]
