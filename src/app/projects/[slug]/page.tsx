@@ -208,7 +208,11 @@ export default async function ProjectDetailPage({
         </div>
 
         <aside className="space-y-8">
-          <div className="border border-red-500/20 rounded-2xl p-6 bg-red-500/5">
+          <div
+            data-cursor-glow
+            tabIndex={0}
+            className="cursor-card border border-red-500/20 rounded-2xl p-6 bg-red-500/5 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
+          >
             <h3 className="text-sm uppercase tracking-widest text-red-300 mb-4">At a glance</h3>
             <dl className="space-y-4 text-sm">
               <div>
@@ -226,7 +230,11 @@ export default async function ProjectDetailPage({
             </dl>
           </div>
 
-          <div className="border border-red-500/20 rounded-2xl p-6 bg-red-500/5">
+          <div
+            data-cursor-glow
+            tabIndex={0}
+            className="cursor-card border border-red-500/20 rounded-2xl p-6 bg-red-500/5 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
+          >
             <h3 className="text-sm uppercase tracking-widest text-red-300 mb-4">Stack</h3>
             <div className="space-y-4">
               {project.techStack.map((group) => (
@@ -254,7 +262,7 @@ export default async function ProjectDetailPage({
         <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             href={`/projects/${prev.slug}`}
-            className="group rounded-2xl border border-red-500/20 p-5 hover:border-red-500/60 transition flex items-center gap-4"
+            className="cursor-card group rounded-2xl border border-red-500/20 p-5 transition flex items-center gap-4"
           >
             <FaArrowLeft className="text-red-400 group-hover:-translate-x-1 transition" />
             <div>
@@ -264,7 +272,7 @@ export default async function ProjectDetailPage({
           </Link>
           <Link
             href={`/projects/${next.slug}`}
-            className="group rounded-2xl border border-red-500/20 p-5 hover:border-red-500/60 transition flex items-center justify-end gap-4 text-right"
+            className="cursor-card group rounded-2xl border border-red-500/20 p-5 transition flex items-center justify-end gap-4 text-right"
           >
             <div>
               <div className="text-xs text-gray-500">Next</div>

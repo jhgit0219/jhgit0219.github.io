@@ -6,11 +6,13 @@ const INTERACTIVE_SELECTOR =
   '.cursor-card, [data-cursor-glow], a, button, [role="button"]';
 
 const TRAIL: { size: number; ease: number }[] = [
-  { size: 14, ease: 0.32 },
-  { size: 12, ease: 0.22 },
-  { size: 10, ease: 0.16 },
-  { size: 8, ease: 0.11 },
+  { size: 22, ease: 0.32 },
+  { size: 18, ease: 0.22 },
+  { size: 14, ease: 0.16 },
+  { size: 10, ease: 0.11 },
 ];
+
+const MAIN_SIZE = 28;
 
 export default function CustomCursor() {
   const mainNodeRef = useRef<HTMLDivElement>(null);
@@ -70,26 +72,31 @@ export default function CustomCursor() {
         main.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) scale(${scaleRef.current})`;
       }
 
-      const active = currentTargetRef.current;
-      if (active) {
-        const card =
-          active instanceof HTMLElement && active.classList.contains("cursor-card")
-            ? active
-            : active.closest?.(".cursor-card") ?? null;
-        if (card instanceof HTMLElement) {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty("--fill-x", `${e.clientX - rect.left}px`);
-          card.style.setProperty("--fill-y", `${e.clientY - rect.top}px`);
-        }
-      }
-
       recheckVisibility();
+    };
+
+    // Write cursor position as the card's pour-fill origin. Called only on
+    // enter (fill starts here) and just before exit (retract shrinks here),
+    // never on every mousemove.
+    const writeFillOriginOn = (el: Element | null) => {
+      if (!el) return;
+      const card =
+        el instanceof HTMLElement && el.classList.contains("cursor-card")
+          ? el
+          : el.closest?.(".cursor-card") ?? null;
+      if (card instanceof HTMLElement) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--fill-x", `${mouseRef.current.x - rect.left}px`);
+        card.style.setProperty("--fill-y", `${mouseRef.current.y - rect.top}px`);
+      }
     };
 
     const handleScroll = () => recheckVisibility();
 
     const clearCurrent = () => {
       if (currentTargetRef.current) {
+        // Update origin to cursor's current position so retract shrinks there.
+        writeFillOriginOn(currentTargetRef.current);
         currentTargetRef.current.removeAttribute("data-cursor-active");
         currentTargetRef.current = null;
       }
@@ -112,17 +119,13 @@ export default function CustomCursor() {
       }
       if (interactive === currentTargetRef.current) return;
 
-      const card =
-        target instanceof Element ? target.closest(".cursor-card") : null;
-      if (card && card instanceof HTMLElement) {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty("--fill-x", `${mouseRef.current.x - rect.left}px`);
-        card.style.setProperty("--fill-y", `${mouseRef.current.y - rect.top}px`);
-      }
-
+      // Switching targets: update old card's origin to exit point before unsetting.
       if (currentTargetRef.current) {
+        writeFillOriginOn(currentTargetRef.current);
         currentTargetRef.current.removeAttribute("data-cursor-active");
       }
+      // Set new card's origin at cursor's entry position.
+      writeFillOriginOn(target);
       interactive.setAttribute("data-cursor-active", "true");
       currentTargetRef.current = interactive;
       hoveringRef.current = true;
@@ -214,6 +217,7 @@ export default function CustomCursor() {
         style={{
           filter: "url(#cursor-goo)",
           opacity: heroOpacity,
+          mixBlendMode: "lighten",
           transition: "opacity 260ms cubic-bezier(0.4, 0, 0.2, 1)",
           willChange: "opacity",
         }}
@@ -245,10 +249,10 @@ export default function CustomCursor() {
             position: "fixed",
             top: 0,
             left: 0,
-            width: 18,
-            height: 18,
-            marginLeft: -9,
-            marginTop: -9,
+            width: MAIN_SIZE,
+            height: MAIN_SIZE,
+            marginLeft: -MAIN_SIZE / 2,
+            marginTop: -MAIN_SIZE / 2,
             borderRadius: "9999px",
             background: "rgb(153, 27, 27)",
             willChange: "transform",
