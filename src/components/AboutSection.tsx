@@ -122,12 +122,12 @@ export default function AboutSection() {
               key={item.year}
               data-cursor-glow
               tabIndex={0}
-              className="cursor-card relative p-5 rounded-xl bg-[#111] border border-red-500/10 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
+              className="cursor-card p-5 rounded-xl bg-[#111] border border-red-500/10 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
             >
-              <div className="absolute -top-2 left-4 text-[10px] uppercase tracking-widest text-red-400 bg-[#0a0a0a] px-2">
+              <div className="text-[10px] uppercase tracking-widest text-red-400 mb-2">
                 {item.year}
               </div>
-              <p className="text-xs md:text-sm text-gray-400 leading-relaxed mt-2">
+              <p className="text-xs md:text-sm text-gray-400 leading-relaxed">
                 {item.text}
               </p>
             </div>
