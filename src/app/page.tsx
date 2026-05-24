@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <>
       <NavDrawer onNavigate={scrollToSection} activeSection={activeSection} />
-      <HeroFrames onViewWorkClick={() => scrollToSection("features")} />
+      <HeroFrames onViewWorkClick={() => scrollToSection("about")} />
 
         <ScrollSection>
           <section id="about" ref={aboutRef}>

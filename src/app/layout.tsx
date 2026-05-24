@@ -18,12 +18,38 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://jhgit0219-github-io.vercel.app";
+const SITE_TITLE = "Jetchomen Husain — Full-Stack & AI Engineering Portfolio";
+const SITE_DESCRIPTION =
+  "Full-stack engineer at Accenture. Enterprise stacks by day — React, Spring Boot, .NET, PEGA — plus multi-agent orchestration and AI tooling after hours.";
+
 export const metadata: Metadata = {
-  title: "Jetchomen | Full Stack Developer",
-  description:
-    "Portfolio of Jetchomen Husain – Full Stack Developer specializing in React, Spring Boot, and PEGA.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   icons: {
     icon: "/images/j-icon.ico",
+  },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: "Jetchomen Husain",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 572,
+        alt: SITE_TITLE,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
   },
 };
 

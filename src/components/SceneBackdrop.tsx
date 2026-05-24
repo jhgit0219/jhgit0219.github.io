@@ -256,7 +256,7 @@ export default function SceneBackdrop() {
             <div className="absolute left-14 top-5 flex items-center gap-2 md:left-16 md:top-6">
               <div className="h-px w-8 bg-blood-700/60" />
               <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-zinc-400">
-                Signal Lock // Live
+                Signal Lock<span className="hidden md:inline"> // Live</span>
               </span>
             </div>
           )}
@@ -272,7 +272,7 @@ export default function SceneBackdrop() {
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-blood-600 shadow-[0_0_10px_rgba(220,38,38,0.85)]" />
             </div>
           ) : (
-            <div className="absolute right-6 top-5 flex items-center gap-3 md:right-10 md:top-6">
+            <div className="absolute right-6 top-5 hidden min-[400px]:flex items-center gap-3 md:right-10 md:top-6">
               <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-zinc-400">
                 Abyss Depth
               </span>
@@ -309,7 +309,7 @@ export default function SceneBackdrop() {
           </div>
 
           <div className="absolute inset-x-0 bottom-3 mx-6 text-center font-mono text-[10px] uppercase tracking-[0.28em] text-zinc-500 md:mx-10">
-            &copy; {new Date().getFullYear()} Jetchomen Husain. All rights reserved.
+            &copy; {new Date().getFullYear()} Jetchomen Husain<span className="hidden md:inline">. All rights reserved.</span>
           </div>
         </div>
       </div>
