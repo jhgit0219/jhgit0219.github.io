@@ -10,15 +10,16 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-screen min-h-[70vh] md:min-h-screen bg-[#0a0a0a] px-4 md:px-6 pt-12 pb-12 md:pt-20 md:pb-32 text-gray-200 scroll-mt-14 md:scroll-mt-0 flex items-center justify-center"
+      className="relative z-10 w-screen px-6 md:px-12 py-8 md:py-12 text-gray-200 scroll-mt-14 md:scroll-mt-0 flex items-center justify-center md:min-h-[calc(100dvh-7rem)]"
     >
-      <div className="w-full max-w-7xl flex flex-col md:flex-row items-center gap-16">
-        <div className="w-full md:w-1/3 flex flex-col items-start justify-start pt-4 md:pt-0 md:mt-[-200px] px-4">
+      <div className="w-full max-w-6xl flex flex-col md:flex-row items-center gap-16">
+        <div className="w-full md:w-1/3 flex flex-col items-start justify-start pt-4 md:pt-0 px-4">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
-            Want to work with me?
+            Want to work together?
           </h2>
-          <p className="text-gray-400 mb-6 text-base md:text-lg">
-            I’d love to hear from you. Reach out via any of these platforms.
+          <p className="text-gray-200 mb-6 text-base md:text-lg [text-shadow:_0_1px_8px_rgba(0,0,0,0.85)]">
+            Pick the channel that&rsquo;s easiest for you. I read everything
+            that lands.
           </p>
 
           <div className="space-y-4 text-base md:text-lg">
@@ -57,7 +58,9 @@ export default function ContactSection() {
 
         {/* RIGHT PANEL */}
         <div className="relative w-full md:w-2/3 max-w-3xl">
-          {/* Desktop: Laptop image */}
+          {/* Desktop: Laptop image. Single dark-mode screen container holds
+              both the heading and the form so the laptop screen reads as a
+              real powered-on dark UI instead of a transparent rectangle. */}
           <div className="hidden md:block">
             <Image
               src="/images/laptop.png"
@@ -66,17 +69,17 @@ export default function ContactSection() {
               height={600}
               className="w-full h-auto object-contain pointer-events-none select-none"
             />
-            <div className="absolute top-[10%] left-[13%] w-[74%] text-center">
-              <h3 className="text-white text-lg md:text-3xl font-semibold tracking-wide">
+            <div className="absolute top-[4%] left-[7%] w-[86%] h-[85%] bg-abyss-900 rounded-md p-5 border border-red-500/15 shadow-md flex flex-col gap-4 overflow-hidden">
+              <h3 className="text-white text-lg md:text-2xl font-semibold tracking-wide text-center">
                 Shoot me a message!
               </h3>
-            </div>
-            <div className="absolute top-[18%] left-[13%] w-[74%] h-[60%] bg-[#111] rounded-md p-4 border border-red-500/20 shadow-md">
-              <ContactForm />
+              <div className="flex-1 min-h-0">
+                <ContactForm />
+              </div>
             </div>
           </div>
 
-          {/* Mobile: Phone image */}
+          {/* Mobile: Phone image. Same dark-mode screen treatment. */}
           <div className="block md:hidden">
             <Image
               src="/images/phone.png"
@@ -85,13 +88,13 @@ export default function ContactSection() {
               height={800}
               className="w-full h-auto object-contain mx-auto pointer-events-none select-none"
             />
-            <div className="absolute top-[10%] left-[10%] w-[80%] text-center">
-              <h3 className="text-white text-xl font-semibold">
+            <div className="absolute top-[5%] left-[7%] w-[86%] h-[83%] bg-abyss-900 rounded-md p-4 border border-red-500/15 shadow-md flex flex-col gap-3 overflow-hidden">
+              <h3 className="text-white text-lg font-semibold text-center">
                 Shoot me a message!
               </h3>
-            </div>
-            <div className="absolute top-[17%] left-[10%] w-[80%] h-[65%] bg-[#111] rounded-md p-3 border border-red-500/20 shadow-md">
-              <ContactForm />
+              <div className="flex-1 min-h-0">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </div>

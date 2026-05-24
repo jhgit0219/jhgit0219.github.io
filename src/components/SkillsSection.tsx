@@ -11,7 +11,7 @@ interface SkillGroup {
 const groups: SkillGroup[] = [
   {
     label: "Frontend",
-    blurb: "Strictly typed components, accessible interfaces, and performant state management.",
+    blurb: "Strict types, accessible interfaces, state that doesn't bog down on big trees.",
     items: [
       "React",
       "Next.js",
@@ -24,7 +24,7 @@ const groups: SkillGroup[] = [
   },
   {
     label: "Backend",
-    blurb: "Clear API boundaries, isolated services, and stable deployments.",
+    blurb: "Clear API contracts. Boring deployments. Services that fail loudly when they break.",
     items: [
       "Node.js",
       "Express",
@@ -39,12 +39,12 @@ const groups: SkillGroup[] = [
   },
   {
     label: "Data",
-    blurb: "Domain-driven database schemas and optimized indexing.",
+    blurb: "Schemas that match the domain, indexes that match the queries.",
     items: ["MongoDB", "PostgreSQL", "Firebase", "pandas", "Redis"],
   },
   {
     label: "AI and automation",
-    blurb: "Managing local inference, agent workflows, and streaming responses.",
+    blurb: "Local model inference, agent orchestration, streaming responses straight into real UIs.",
     items: [
       "PyTorch",
       "Diffusers",
@@ -56,12 +56,12 @@ const groups: SkillGroup[] = [
   },
   {
     label: "Test automation",
-    blurb: "Comprehensive end-to-end testing focused on edge cases and state validation.",
+    blurb: "End-to-end coverage that catches real regressions, not just happy paths.",
     items: ["Playwright", "Jest", "Vitest", "TypeScript"],
   },
   {
     label: "DevOps and tooling",
-    blurb: "CI/CD pipelines, containerization, and infrastructure monitoring.",
+    blurb: "Pipelines, containers, and dashboards I trust enough to deploy on a Friday.",
     items: [
       "Docker",
       "GitHub Actions",
@@ -74,7 +74,7 @@ const groups: SkillGroup[] = [
   },
   {
     label: "Enterprise",
-    blurb: "Maintaining legacy systems, implementing audit logging, and workflow routing.",
+    blurb: "Working in old codebases without making them worse. Audit trails, routing, PEGA quirks.",
     items: ["PEGA", "Java", "C#", "Case Management", "Integration Patterns"],
   },
 ];
@@ -83,22 +83,22 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="relative w-screen bg-gradient-to-b from-[#0a0a0a] via-[#0d0505] to-[#0a0a0a] py-16 md:py-20 px-6 md:px-12 scroll-mt-14 md:scroll-mt-0 overflow-hidden"
+      className="relative z-10 w-screen py-8 md:py-12 px-6 md:px-12 scroll-mt-14 md:scroll-mt-0 overflow-hidden md:min-h-[calc(100dvh-7rem)] md:flex md:flex-col md:justify-center"
     >
       {/* Decorative top line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[2px] bg-gradient-to-r from-transparent via-red-500 to-transparent" />
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto w-full">
         <div className="text-center mb-16 md:mb-20">
-          <div className="text-xs uppercase tracking-widest text-red-400 mb-3">
-            Toolkit
+          <div className="text-sm md:text-base uppercase tracking-[0.3em] text-red-400 font-mono font-semibold mb-3">
+            /toolkit
           </div>
           <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight">
             Core <span className="text-red-500">technologies</span>
           </h2>
-          <p className="max-w-2xl mx-auto mt-5 text-gray-400 text-base md:text-lg">
-            Everything listed here is a tool I use heavily in either day-to-day
-            engineering or active personal projects.
+          <p className="max-w-2xl mx-auto mt-5 text-gray-200 text-base md:text-lg [text-shadow:_0_1px_8px_rgba(0,0,0,0.85)]">
+            Everything below is something I actually use, either at work or on
+            side projects. No padding for resume score.
           </p>
         </div>
 
@@ -112,7 +112,8 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="cursor-card group rounded-2xl bg-[#111] border border-red-500/20 p-6 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
+              style={{ willChange: "transform, opacity" }}
+              className="cursor-card group rounded-sm frost border border-red-500/20 p-6 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
             >
               <div className="flex items-baseline justify-between mb-2">
                 <h3 className="text-xl font-bold text-white">{g.label}</h3>

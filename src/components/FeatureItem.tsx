@@ -25,7 +25,7 @@ function ProjectPreview({
           fill
           quality={95}
           sizes="(max-width: 768px) 100vw, 1280px"
-          className="object-cover rounded-xl"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <span className="absolute top-3 left-3 text-[10px] uppercase tracking-widest bg-black/60 backdrop-blur-sm text-red-300 border border-red-500/40 rounded-full px-2.5 py-1">
@@ -86,23 +86,24 @@ export default function FeatureItem({
   return (
     <ScrollReveal reverse={false}>
       <div
-        className={`mx-auto w-full max-w-7xl px-4 md:px-8 py-6 flex flex-col md:flex-row items-start gap-6 md:gap-10 ${
+        className={`w-full flex flex-col md:flex-row items-start gap-6 md:gap-10 ${
           reverse ? "md:flex-row-reverse" : ""
         }`}
       >
-        {/* Preview panel — links to detail */}
+        {/* Preview panel — links to detail. group lives on the outer card
+            (FeatureSection wrapper), so card-level hover propagates here. */}
         <Link
           href={`/projects/${slug}`}
           aria-label={`Open ${title} details`}
-          className="relative w-full md:w-[90%]"
+          className="relative w-full md:flex-1 md:min-w-0"
         >
-          <TiltImage className="relative w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(220,38,38,0.2)] border border-red-600 group-hover:shadow-[0_0_30px_rgba(220,38,38,0.4),0_0_60px_rgba(220,38,38,0.15)] transition-shadow duration-500">
+          <TiltImage className="relative w-full overflow-hidden rounded-sm shadow-[0_0_20px_rgba(220,38,38,0.2)] border border-red-600 group-hover:shadow-[0_0_30px_rgba(220,38,38,0.4),0_0_60px_rgba(220,38,38,0.15)] transition-shadow duration-500">
             <ProjectPreview image={image} title={title} statusLabel={statusLabel} tags={tags} />
           </TiltImage>
         </Link>
 
-        {/* Text Panel */}
-        <div className="w-full md:w-[90%] p-5 md:p-6 rounded-xl text-left text-gray-200">
+        {/* Text Panel — bare (the outer card already provides the frosted surface) */}
+        <div className="w-full md:flex-1 md:min-w-0 text-left text-gray-200">
           <Link href={`/projects/${slug}`} className="inline-block group/title">
             <h3 className="text-3xl font-bold text-white mb-3 group-hover/title:text-red-300 transition-colors">
               {title}

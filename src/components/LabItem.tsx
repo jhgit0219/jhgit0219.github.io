@@ -36,7 +36,8 @@ export default function LabItem({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="cursor-card group relative h-full flex flex-col rounded-xl border border-red-500/20 bg-[#0d0d0d] p-5 md:p-6 overflow-hidden"
+      style={{ willChange: "transform, opacity" }}
+      className="cursor-card group relative h-full flex flex-col rounded-sm border border-red-500/20 frost p-5 md:p-6 overflow-hidden"
     >
       {/* Card-wide click target: invisible, anchored to the title link via ::after */}
       <div className="flex items-center justify-between mb-4">

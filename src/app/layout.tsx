@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import ScrollReset from "@/components/ScrollReset";
 import CustomCursor from "@/components/CustomCursor";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import SceneBackdrop from "@/components/SceneBackdrop";
+import ImagePreloader from "@/components/ImagePreloader";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -35,7 +38,25 @@ export default function RootLayout({
       >
         <ScrollReset />
         <CustomCursor />
-        {children}
+        <ImagePreloader />
+        <SceneBackdrop />
+        <SmoothScrollProvider>
+          {/* The actual scroll container for the whole site. Lives in the
+              layout so it's stable across client-side route changes
+              (SceneBackdrop / Lenis attach listeners to this element once
+              and don't get stale on navigation). Its bottom edge ends 80px
+              above the viewport bottom, reserving that strip for the camera
+              footer (progress bar + diagnostic) — content physically cannot
+              scroll into it. */}
+          <main
+            id="scroll-root"
+            className="fixed inset-x-0 top-16 bottom-12 z-10 overflow-y-auto overflow-x-hidden"
+          >
+            <div id="scroll-content" className="w-full">
+              {children}
+            </div>
+          </main>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

@@ -47,6 +47,7 @@ export default function ScrollSection({
           : { opacity: 1, y: 0 }
       }
       transition={{ duration: 0.6 }}
+      style={{ willChange: "transform, opacity" }}
       className={`min-h-0 flex items-center justify-center ${className}`}
     >
       {children}

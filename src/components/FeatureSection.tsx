@@ -8,16 +8,16 @@ export default function FeatureSection() {
   return (
     <section
       id="features"
-      className="w-screen bg-[#0a0a0a] pt-16 md:pt-20 pb-32 space-y-24 scroll-mt-14 md:scroll-mt-0 overflow-x-hidden"
+      className="relative z-10 w-screen pt-8 md:pt-12 pb-8 md:pb-12 px-6 md:px-12 space-y-24 scroll-mt-14 md:scroll-mt-0 overflow-x-hidden md:min-h-[calc(100dvh-7rem)]"
     >
-      <div className="max-w-4xl mx-auto text-center text-gray-300 space-y-4 px-6">
-        <div className="text-xs uppercase tracking-widest text-red-400">Selected work</div>
+      <div className="max-w-4xl mx-auto text-center text-gray-300 space-y-4">
+        <div className="text-sm md:text-base uppercase tracking-[0.3em] text-red-400 font-mono font-semibold">/selected-work</div>
         <h1 className="text-5xl md:text-6xl font-extrabold text-white">
           PROJECTS
         </h1>
-        <p className="text-lg md:text-2xl text-gray-400 max-w-2xl mx-auto">
-          Recent software I have built. Select any project to see the tech
-          stack, implementation details, and my role.
+        <p className="text-lg md:text-2xl text-gray-200 max-w-2xl mx-auto [text-shadow:_0_1px_8px_rgba(0,0,0,0.85)]">
+          Software I&rsquo;ve shipped recently. Click any project for the
+          stack, the design calls, and what I actually built.
         </p>
       </div>
       {projects.map((project) => (
@@ -25,7 +25,7 @@ export default function FeatureSection() {
           key={project.id}
           data-cursor-glow
           tabIndex={0}
-          className="cursor-card group relative w-full md:w-[calc(100vw-7rem)] md:ml-[7rem] rounded-3xl md:rounded-l-3xl md:rounded-r-none outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
+          className="cursor-card group relative w-full max-w-6xl mx-auto rounded-sm border border-red-500/15 frost px-4 py-6 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60 md:px-8 md:py-8"
         >
           <FeatureItem project={project} reverse={project.reverse} />
         </div>

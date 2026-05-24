@@ -47,31 +47,9 @@ export default async function ProjectDetailPage({
       ? "Local"
       : "Archived";
 
-  const backHref = project.kind === "lab" ? "/#lab" : "/#features";
-  const backLabel = project.kind === "lab" ? "All lab entries" : "All projects";
-
   return (
-    <main className="min-h-screen w-full bg-[#0a0a0a] text-gray-200">
+    <div className="relative z-10 min-h-full w-full text-gray-200">
       <ProjectDetailClient />
-
-      {/* Top bar with back */}
-      <div className="sticky top-0 z-40 backdrop-blur-md bg-[#0a0a0a]/70 border-b border-red-500/20">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
-          <Link
-            href={backHref}
-            className="inline-flex items-center gap-2 text-red-300 hover:text-white transition text-sm"
-          >
-            <FaArrowLeft className="text-xs" />
-            {backLabel}
-          </Link>
-          <Link
-            href="/"
-            className="text-white text-xl font-bold tracking-wide hover:text-red-300 transition"
-          >
-            J
-          </Link>
-        </div>
-      </div>
 
       {/* Hero banner */}
       <section className="relative w-full border-b border-red-500/10">
@@ -136,7 +114,7 @@ export default async function ProjectDetailPage({
 
         {project.image && (
           <div className="max-w-6xl mx-auto px-6 md:px-10 pb-12 md:pb-16">
-            <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-red-600/60 shadow-[0_0_40px_rgba(220,38,38,0.2)]">
+            <div className="relative w-full aspect-[16/9] rounded-sm overflow-hidden border border-red-600/60 shadow-[0_0_40px_rgba(220,38,38,0.2)]">
               <Image
                 src={project.image}
                 alt={project.title}
@@ -153,7 +131,7 @@ export default async function ProjectDetailPage({
 
       {/* Overview + sidebar */}
       <section className="max-w-6xl mx-auto px-6 md:px-10 py-16 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
-        <div>
+        <div className="rounded-sm border border-red-500/15 frost p-6 md:p-8">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Overview</h2>
           <p className="text-gray-300 text-base md:text-lg leading-relaxed whitespace-pre-line">
             {project.longDescription}
@@ -197,7 +175,7 @@ export default async function ProjectDetailPage({
                 {project.gallery.map((src) => (
                   <div
                     key={src}
-                    className="relative aspect-[16/10] rounded-xl overflow-hidden border border-red-500/30"
+                    className="relative aspect-[16/10] rounded-sm overflow-hidden border border-red-500/30"
                   >
                     <Image src={src} alt="" fill className="object-cover" sizes="50vw" />
                   </div>
@@ -211,7 +189,7 @@ export default async function ProjectDetailPage({
           <div
             data-cursor-glow
             tabIndex={0}
-            className="cursor-card border border-red-500/20 rounded-2xl p-6 bg-red-500/5 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
+            className="cursor-card border border-red-500/20 rounded-sm p-6 frost outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
           >
             <h3 className="text-sm uppercase tracking-widest text-red-300 mb-4">At a glance</h3>
             <dl className="space-y-4 text-sm">
@@ -233,7 +211,7 @@ export default async function ProjectDetailPage({
           <div
             data-cursor-glow
             tabIndex={0}
-            className="cursor-card border border-red-500/20 rounded-2xl p-6 bg-red-500/5 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
+            className="cursor-card border border-red-500/20 rounded-sm p-6 frost outline-none focus-visible:ring-2 focus-visible:ring-red-500/60"
           >
             <h3 className="text-sm uppercase tracking-widest text-red-300 mb-4">Stack</h3>
             <div className="space-y-4">
@@ -262,7 +240,7 @@ export default async function ProjectDetailPage({
         <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             href={`/projects/${prev.slug}`}
-            className="cursor-card group rounded-2xl border border-red-500/20 p-5 transition flex items-center gap-4"
+            className="cursor-card group rounded-sm border border-red-500/20 frost p-5 transition flex items-center gap-4"
           >
             <FaArrowLeft className="text-red-400 group-hover:-translate-x-1 transition" />
             <div>
@@ -272,7 +250,7 @@ export default async function ProjectDetailPage({
           </Link>
           <Link
             href={`/projects/${next.slug}`}
-            className="cursor-card group rounded-2xl border border-red-500/20 p-5 transition flex items-center justify-end gap-4 text-right"
+            className="cursor-card group rounded-sm border border-red-500/20 frost p-5 transition flex items-center justify-end gap-4 text-right"
           >
             <div>
               <div className="text-xs text-gray-500">Next</div>
@@ -283,9 +261,6 @@ export default async function ProjectDetailPage({
         </div>
       </nav>
 
-      <footer className="w-full border-t border-red-500/20 pt-6 pb-10 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Jetchomen Husain. All rights reserved.
-      </footer>
-    </main>
+    </div>
   );
 }
