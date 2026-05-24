@@ -4,15 +4,8 @@ import { useEffect } from "react";
 import projects from "@/data/projects.json";
 import type { Project } from "@/class/project";
 
-/**
- * Fires once on app mount and primes the browser cache with every image the
- * page will eventually need — project previews, contact section laptop/phone.
- * The hero frame sequence is preloaded separately by SceneBackdrop (which
- * also gates render with a loading screen until those 169 frames are ready).
- *
- * After this runs, scrolling into the projects / contact sections paints
- * instantly because the images are already in the HTTP cache.
- */
+// Primes the browser cache with project previews + contact assets on mount.
+// Hero frames are preloaded separately by SceneBackdrop.
 export default function ImagePreloader() {
   useEffect(() => {
     const urls = new Set<string>();

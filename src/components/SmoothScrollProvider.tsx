@@ -9,10 +9,8 @@ export default function SmoothScrollProvider({ children }: Props) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // #scroll-root is the fixed-positioned <main> that replaces document
-    // scroll; #scroll-content is its single child wrapping the page sections.
-    // Both are rendered by page.tsx and are present by the time this effect
-    // runs (children mount before effects fire in the parent).
+    // Lenis drives the fixed <main id="scroll-root"> from layout.tsx instead
+    // of the document.
     const wrapper = document.getElementById("scroll-root");
     const content = document.getElementById("scroll-content");
     if (!wrapper || !content) return;

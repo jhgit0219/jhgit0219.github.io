@@ -43,13 +43,9 @@ export default function RootLayout({
         <MotionWarmup />
         <SceneBackdrop />
         <SmoothScrollProvider>
-          {/* The actual scroll container for the whole site. Lives in the
-              layout so it's stable across client-side route changes
-              (SceneBackdrop / Lenis attach listeners to this element once
-              and don't get stale on navigation). Its bottom edge ends 80px
-              above the viewport bottom, reserving that strip for the camera
-              footer (progress bar + diagnostic) — content physically cannot
-              scroll into it. */}
+          {/* Site-wide scroll container. Lives in layout (not page) so
+              listeners attached by Lenis / SceneBackdrop survive route
+              changes. Inset top-16/bottom-12 reserves the HUD bands. */}
           <main
             id="scroll-root"
             className="fixed inset-x-0 top-16 bottom-12 z-10 overflow-y-auto overflow-x-hidden"

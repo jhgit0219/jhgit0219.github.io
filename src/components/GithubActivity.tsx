@@ -12,22 +12,16 @@ import {
 
 const GITHUB_USERNAME = "jhgit0219";
 
-// jogruber's public contributions API — no auth, no rate limit issues for
-// portfolio-scale traffic. Returns 365 days of contribution counts + levels.
+// jogruber's public contributions API — no auth required.
 const HEATMAP_API = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`;
 
-// GitHub's public events API — gives lifecycle events (PR/issue/star/release/
-// fork/create). We deliberately drop PushEvent from here and source commits
-// from the per-repo endpoint instead, because /events only surfaces pushes
-// to PUBLIC repos and most active work tends to live in private ones.
+// /events only surfaces PushEvents from PUBLIC repos, so we drop them here
+// and source commits from the per-repo endpoint below instead.
 const EVENTS_API = `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=40`;
 const REPOS_API = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=10`;
 
-// How many of the user's most-recently-pushed public repos to scrape for
-// commits, and how many commits to pull from each. Total cost in the
-// unauthenticated /repos/.../commits bucket: TOP_REPOS_FOR_COMMITS calls per
-// visit, well within the 60/hr per-IP budget alongside heatmap + events +
-// the separate GithubRepos fetch.
+// Stays within the unauthenticated 60/hr per-IP budget alongside heatmap,
+// events, and the separate GithubRepos fetch.
 const TOP_REPOS_FOR_COMMITS = 4;
 const COMMITS_PER_REPO = 6;
 const FEED_MAX = 8;
@@ -200,7 +194,6 @@ function EventIcon({ kind }: { kind: FeedEntry["icon"] }) {
   }
 }
 
-// Build a 53-week × 7-day matrix from the day-keyed contribution list.
 // Pads the leading week with nulls so the first column's day-of-week
 // alignment is correct.
 function buildWeeks(contribs: Contribution[]): Array<Array<Contribution | null>> {
@@ -268,11 +261,8 @@ export default function GithubActivity() {
       .then((d) => !cancelled && setHeatmap(d))
       .catch(() => !cancelled && setHeatmapErr(true));
 
-    // Two-source feed: lifecycle events (PR/issue/star/release/fork/create)
-    // from /events, plus individual commits scraped from the top N
-    // recently-pushed public repos. Pushes to private repos don't appear in
-    // /events for unauthenticated callers, so the per-repo fetch is what
-    // makes the feed feel live for users whose work mostly lives in private.
+    // Lifecycle events from /events plus per-repo commits, since /events
+    // hides pushes to private repos for unauthenticated callers.
     (async () => {
       try {
         const [eventsJson, reposJson] = await Promise.all([
@@ -496,8 +486,7 @@ export default function GithubActivity() {
             </div>
           )}
 
-          {/* Footer CTA — anchored to the bottom so the card fills its
-              column height even when the feed is short. */}
+          {/* mt-auto so the CTA anchors to the bottom when the feed is short. */}
           <a
             href={`https://github.com/${GITHUB_USERNAME}?tab=overview`}
             target="_blank"

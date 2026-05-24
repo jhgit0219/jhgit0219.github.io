@@ -39,9 +39,7 @@ export default function NavDrawer({
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Expose drawer state to the rest of the page via a body attribute so the
-  // top HUD chrome (mounted by SceneBackdrop in the layout) can fade out
-  // when the drawer is open and not bleed through the panel.
+  // Body attribute lets the SceneBackdrop HUD fade out when the drawer is open.
   useEffect(() => {
     if (open) {
       document.body.setAttribute("data-nav-open", "true");
@@ -81,8 +79,7 @@ export default function NavDrawer({
         className="fixed left-0 top-0 z-40 h-screen w-6"
       />
 
-      {/* Drawer toggle — appears after the hero. Slim chevron, top-left.
-          Hidden during hero so it doesn't compete with the HUD chrome. */}
+      {/* Hidden during hero so it doesn't compete with the HUD chrome. */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -99,8 +96,7 @@ export default function NavDrawer({
         {open ? <FaChevronLeft className="text-[11px]" /> : <FaChevronRight className="text-[11px]" />}
       </button>
 
-      {/* Click-away surface — subtle dim only. No backdrop-blur of its own
-          so the drawer's frost gets a clean view of the canvas behind. */}
+      {/* No backdrop-blur — would muddy the drawer's frost behind it. */}
       {open && (
         <div
           aria-hidden
@@ -109,7 +105,6 @@ export default function NavDrawer({
         />
       )}
 
-      {/* Slide-in drawer */}
       <aside
         onMouseLeave={() => setOpen(false)}
         style={{ ["--frost-blur" as string]: "var(--frost-blur-strong)" }}
