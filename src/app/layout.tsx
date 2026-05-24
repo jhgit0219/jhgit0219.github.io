@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import SceneBackdrop from "@/components/SceneBackdrop";
 import ImagePreloader from "@/components/ImagePreloader";
+import MotionWarmup from "@/components/MotionWarmup";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <ScrollReset />
         <CustomCursor />
         <ImagePreloader />
+        <MotionWarmup />
         <SceneBackdrop />
         <SmoothScrollProvider>
           {/* The actual scroll container for the whole site. Lives in the

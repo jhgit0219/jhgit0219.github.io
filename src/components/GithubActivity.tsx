@@ -448,33 +448,35 @@ export default function GithubActivity() {
 
           {feed ? (
             feed.length > 0 ? (
-              <ul className="space-y-3.5">
+              <ul className="space-y-1.5">
                 {feed.map((entry) => (
-                  <li key={entry.id} className="flex gap-3 items-start">
-                    <span className="mt-1 flex-shrink-0 w-6 h-6 rounded-sm border border-red-500/30 bg-red-500/10 flex items-center justify-center text-red-300 text-[10px]">
-                      <EventIcon kind={entry.icon} />
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-baseline justify-between gap-3">
-                        <a
-                          href={entry.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-sm text-white hover:text-red-300 transition truncate"
-                        >
-                          {entry.title}
-                        </a>
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-gray-500 flex-shrink-0">
-                          {relativeTime(entry.createdAt)}
-                        </span>
+                  <li key={entry.id}>
+                    <a
+                      href={entry.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex gap-3 items-start rounded-sm p-2 -mx-2 hover:bg-red-500/[0.08] transition-colors"
+                    >
+                      <span className="mt-1 flex-shrink-0 w-6 h-6 rounded-sm border border-red-500/30 bg-red-500/10 flex items-center justify-center text-red-300 text-[10px] group-hover:border-red-500/50 group-hover:bg-red-500/20 transition-colors">
+                        <EventIcon kind={entry.icon} />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-baseline justify-between gap-3">
+                          <span className="font-mono text-sm text-white group-hover:text-red-300 transition-colors truncate">
+                            {entry.title}
+                          </span>
+                          <span className="font-mono text-[10px] uppercase tracking-wider text-gray-500 flex-shrink-0">
+                            {relativeTime(entry.createdAt)}
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-400 truncate">
+                          {entry.repo}
+                          {entry.detail && (
+                            <span className="text-gray-500"> · {entry.detail}</span>
+                          )}
+                        </div>
                       </div>
-                      <div className="text-xs text-gray-400 truncate">
-                        {entry.repo}
-                        {entry.detail && (
-                          <span className="text-gray-500"> · {entry.detail}</span>
-                        )}
-                      </div>
-                    </div>
+                    </a>
                   </li>
                 ))}
               </ul>

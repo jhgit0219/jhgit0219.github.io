@@ -96,7 +96,7 @@ export default function LabItem({
           )}
           <Link
             href={`/projects/${slug}`}
-            className="text-red-300 hover:text-red-200 inline-flex items-center gap-1.5 font-mono transition-colors"
+            className="text-red-300 hover:text-white hover:bg-red-500/20 border border-transparent hover:border-red-500/40 inline-flex items-center gap-1.5 font-mono px-2.5 py-1 -my-1 rounded-sm transition-colors"
           >
             details
             <FaArrowRight className="text-[10px] group-hover:translate-x-0.5 transition-transform" />

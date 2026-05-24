@@ -71,7 +71,7 @@ export default function ConnectPrompt() {
           onClick={() => setDismissed(true)}
           aria-label="Dismiss"
           style={{ position: "absolute" }}
-          className="top-1.5 right-1.5 w-6 h-6 flex items-center justify-center text-gray-500 hover:text-red-300 transition rounded-sm text-[10px]"
+          className="top-1 right-1 w-7 h-7 flex items-center justify-center text-gray-400 hover:text-red-300 hover:bg-red-500/10 active:bg-red-500/20 transition rounded-sm text-xs"
         >
           <FaTimes />
         </button>
