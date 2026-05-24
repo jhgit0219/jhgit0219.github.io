@@ -58,9 +58,8 @@ export default function ContactSection() {
 
         {/* RIGHT PANEL */}
         <div className="relative w-full md:w-2/3 max-w-3xl">
-          {/* Desktop: Laptop image. Single dark-mode screen container holds
-              both the heading and the form so the laptop screen reads as a
-              real powered-on dark UI instead of a transparent rectangle. */}
+          {/* Desktop: laptop image with the form sitting inside a dark
+              screen container so the laptop reads as a powered-on UI. */}
           <div className="hidden md:block">
             <Image
               src="/images/laptop.png"
@@ -79,23 +78,24 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Mobile: Phone image. Same dark-mode screen treatment. */}
-          <div className="block md:hidden">
-            <Image
-              src="/images/phone.png"
-              alt="Phone"
-              width={400}
-              height={800}
-              className="w-full h-auto object-contain mx-auto pointer-events-none select-none"
-            />
-            <div className="absolute top-[5%] left-[7%] w-[86%] h-[83%] bg-abyss-900 rounded-md p-4 border border-red-500/15 shadow-md flex flex-col gap-3 overflow-hidden">
-              <h3 className="text-white text-lg font-semibold text-center">
+          {/* Mobile: dark screen rendered BEHIND the phone PNG so the
+              transparent screen area shows it and the notch/bezel paint on top. */}
+          <div className="relative block md:hidden">
+            <div className="absolute top-0 left-[3%] w-[94%] h-full bg-abyss-900 rounded-[2.5rem] flex flex-col gap-3 p-4 overflow-hidden">
+              <h3 className="text-white text-lg font-semibold text-center pt-6">
                 Shoot me a message!
               </h3>
               <div className="flex-1 min-h-0">
                 <ContactForm />
               </div>
             </div>
+            <Image
+              src="/images/phone.png"
+              alt="Phone"
+              width={400}
+              height={800}
+              className="relative w-full h-auto object-contain mx-auto pointer-events-none select-none"
+            />
           </div>
         </div>
       </div>

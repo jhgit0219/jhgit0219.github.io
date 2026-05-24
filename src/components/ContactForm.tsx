@@ -24,7 +24,7 @@ export default function ContactForm() {
       onSubmit={(e) => {
         if (invalid) e.preventDefault();
       }}
-      className="flex flex-col gap-2 md:gap-2.5 h-full justify-between text-sm"
+      className="flex flex-col gap-2 md:gap-2.5 h-full justify-start md:justify-between text-sm"
     >
       <input
         type="text"

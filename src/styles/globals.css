@@ -35,22 +35,13 @@
 :root {
   --background: var(--color-abyss-900);
   --foreground: var(--color-ash-300);
-  /* Cursor blob color — flipped to pure black when the cursor is over an
-     interactive surface, so it stays visible against the red flood-fill
-     effect on cursor-card hover. */
+  /* Flips to black on cursor-card for contrast against the red flood. */
   --cursor-color: rgb(153, 27, 27);
 
-  /* Frosted glass tokens. Tune these to change every frosted surface
-     (cards, drawer, contact form panel, prompt). The .frost utility
-     below reads them. Borders stay per-component so cards can vary
-     their accent intensity. */
+  /* Frosted glass tokens — tune once, propagates to every .frost surface. */
   --frost-bg: rgba(10, 10, 10, 0.42);
   --frost-blur: 8px;
   --frost-saturate: 0%;
-
-  /* Stronger blur for surfaces that want more frosting than the default
-     cards, like the nav drawer. Applied via inline --frost-blur override
-     on the target element. Tune here, not per-component. */
   --frost-blur-strong: 24px;
 }
 
@@ -58,22 +49,16 @@ body[data-cursor-hovering] {
   --cursor-color: rgb(0, 0, 0);
 }
 
-/* Native OS cursor is hidden on devices that support the custom blob cursor.
-   The custom cursor's media query guard inside CustomCursor.tsx mirrors this
-   so coarse-pointer devices (touch) still see the OS cursor. */
 @media (pointer: fine) and (hover: hover) {
   html,
   body {
     cursor: none;
   }
-  /* Cascade: ensure interactive elements don't reassert their own cursor. */
   body * {
     cursor: none !important;
   }
 }
 
-/* Top HUD chrome (signal lock / abyss depth / corner brackets) fades out
-   when the nav drawer is open so it doesn't bleed through the panel. */
 body[data-nav-open] [data-hud-section="top"] {
   opacity: 0;
   pointer-events: none;
@@ -97,15 +82,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Montserrat", sans-serif;
-  /* Document does not scroll — the #scroll-root <main> is the scroll
-     container, so the bottom 80px of the viewport stays reserved for the
-     camera-frame HUD and content can never appear in it. */
+  /* #scroll-root is the actual scroll container; body never scrolls. */
   overflow: hidden;
   box-sizing: border-box;
 }
 
-/* Thin red-themed scrollbars across the whole site — applies to #scroll-root
-   and any inner overflow containers so we never see the native chrome bar. */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(220, 38, 38, 0.4) transparent;
@@ -173,9 +154,6 @@ body {
   animation: ember-glow 2s ease-in-out infinite;
 }
 
-/* Single frosted background utility. Apply to any surface that needs
-   the unified frost look. Borders, padding, and rounding stay on the
-   element via Tailwind utilities. Tune the look via :root vars above. */
 .frost {
   background-color: var(--frost-bg);
   backdrop-filter: blur(var(--frost-blur)) saturate(var(--frost-saturate));
@@ -194,20 +172,14 @@ body {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  /* Card flood: a radial gradient that starts as a tiny red dot at the cursor
-     entry point and expands outward as the blob drains. The --fill-x and
-     --fill-y variables are written by CustomCursor on hover enter; progress
-     is animated by CSS via the registered @property. */
+  /* Card flood: radial gradient expanding from the cursor entry point.
+     --fill-x / --fill-y are written by CustomCursor on hover enter. */
   .cursor-card {
     --fill-x: 50%;
     --fill-y: 50%;
     position: relative;
-    /* No `isolation: isolate` here on purpose. Isolation would make every
-       card its own backdrop root, which kills the .frost backdrop-filter:
-       the filter ends up capturing the card's own empty interior instead
-       of the canvas behind it. The flood pseudo still stacks correctly
-       because pseudo is z-index: 0 and children are z-index: 1, so order
-       is preserved within the parent stacking context. */
+    /* No isolation: isolate — it'd make every card its own backdrop root
+       and kill the .frost backdrop-filter against the canvas behind it. */
     transition:
       border-color 320ms cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 320ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -240,13 +212,13 @@ body {
       0 0 32px rgba(239, 68, 68, 0.35),
       0 0 64px rgba(239, 68, 68, 0.18);
   }
-  /* Lift text to white on flooded cards so gray-400/500 bodies stay readable. */
+  /* Text → white so gray body copy stays readable over the red flood. */
   .cursor-card:has([data-cursor-active="true"])
     :is(p, span, li, h3, h4, dd, dt),
   .cursor-card[data-cursor-active="true"] :is(p, span, li, h3, h4, dd, dt) {
     color: rgb(255, 255, 255);
   }
-  /* Neutralize the inline pill backgrounds so they don't look like spots on the red flood. */
+  /* Pills lose their red bg so they don't look like blotches on the flood. */
   .cursor-card:has([data-cursor-active="true"]) .bg-red-500\/10,
   .cursor-card[data-cursor-active="true"] .bg-red-500\/10 {
     background-color: rgba(255, 255, 255, 0.15);

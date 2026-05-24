@@ -3,9 +3,7 @@
 import { useEffect, useState } from "react";
 import { FaArrowRight, FaTimes } from "react-icons/fa";
 
-// Show once the user has scrolled past this fraction of the inner scroller.
-// 0.55 lands them around the Lab / GitHub area — past the project showcase,
-// before they hit the contact form themselves.
+// 0.55 lands them around Lab / GitHub — past projects, before contact.
 const SHOW_AT = 0.55;
 
 export default function ConnectPrompt() {
@@ -63,9 +61,8 @@ export default function ConnectPrompt() {
           visible ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
-        {/* Inline `position: absolute` beats `.cursor-card > *`, which
-            otherwise pins direct children to position: relative and floats the
-            × into document flow at the top of the card. */}
+        {/* Inline position: absolute beats `.cursor-card > *` in globals.css
+            which would otherwise float the × into document flow. */}
         <button
           type="button"
           onClick={() => setDismissed(true)}

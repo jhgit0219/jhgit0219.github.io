@@ -24,10 +24,8 @@ export default function SceneBackdrop() {
   const [loadProgress, setLoadProgress] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
-  // Route-aware HUD context. On a project detail route the persistent
-  // header swaps the "Signal Lock / Abyss Depth" sci-fi readouts for the
-  // back link + current project path, so the per-page nav bar above the
-  // project hero can be removed without losing navigation.
+  // On /projects/[slug], the HUD swaps its sci-fi readouts for a back
+  // link + project path so the per-page nav bar isn't needed.
   const pathname = usePathname();
   const projectContext = useMemo(() => {
     const match = pathname?.match(/^\/projects\/([^/]+)\/?$/);
@@ -133,9 +131,7 @@ export default function SceneBackdrop() {
   }, [loaded, drawFrame]);
 
   useEffect(() => {
-    // #scroll-root is the fixed-positioned <main> in page.tsx — the actual
-    // scroll container. We listen to its scroll events and read scrollTop /
-    // scrollHeight / clientHeight from it instead of window.
+    // #scroll-root is the actual scroll container, not window.
     const root = document.getElementById("scroll-root");
     if (!root) return;
 
@@ -171,18 +167,10 @@ export default function SceneBackdrop() {
           depthReadoutRef.current.textContent = depth.toFixed(1) + "%";
         }
 
-        // Readability scrim: transparent during hero (so iron man is vivid),
-        // fades in to dim the canvas behind prose sections.
         if (scrimRef.current) {
           const scrim = Math.min(1, Math.max(0, (progress - 0.04) / 0.10));
           scrimRef.current.style.opacity = String(scrim);
         }
-
-        // Bottom HUD is the canonical site footer now (persistent copyright
-        // + progress bar). It stays visible at all scroll positions.
-
-        // Top HUD stays persistently visible — it lives in the reserved top
-        // 48px band of the viewport (above #scroll-root). No fade or slide.
       });
     };
 
@@ -193,7 +181,6 @@ export default function SceneBackdrop() {
 
   return (
     <>
-      {/* Persistent canvas: fixed-positioned, sits behind all page content. */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-abyss-900"
@@ -203,12 +190,8 @@ export default function SceneBackdrop() {
           className="absolute inset-0 h-full w-full"
           style={{ willChange: "contents", transform: "translateZ(0) scaleX(-1)" }}
         />
-        {/* Vignette + base dim. Uses mix-blend-mode: multiply with grayscale
-            stops so the underlying canvas keeps its saturation (multiply
-            darkens RGB proportionally, unlike an alpha-black overlay which
-            blends toward gray and kills chroma). White = no darkening,
-            black = full darkening, gray = partial darkening that preserves
-            color. */}
+        {/* Vignette via multiply blend so darkening keeps canvas saturation
+            (alpha-black overlays would blend toward gray and kill chroma). */}
         <div
           className="absolute inset-0"
           style={{
@@ -217,8 +200,7 @@ export default function SceneBackdrop() {
             mixBlendMode: "multiply",
           }}
         />
-        {/* Extra left-side darken so hero text on the left half always has
-            a darker backdrop. Same multiply trick. */}
+        {/* Extra left-side darken for hero text readability. */}
         <div
           className="absolute inset-0"
           style={{
@@ -229,8 +211,7 @@ export default function SceneBackdrop() {
         />
       </div>
 
-      {/* Readability scrim: dims the canvas behind prose sections.
-          Transparent during hero, fades in by ~15% scroll. */}
+      {/* Scrim dims the canvas behind prose sections, fades in past hero. */}
       <div
         ref={scrimRef}
         aria-hidden
@@ -238,15 +219,9 @@ export default function SceneBackdrop() {
         style={{ opacity: 0, transition: "opacity 180ms linear" }}
       />
 
-      {/* Frosted strips for the top and bottom HUD bands so the chrome
-          (signal lock / abyss depth / progress bar / copyright) sits on the
-          same frosted surface as the cards rather than floating directly
-          on the canvas. Z-index sits below #scroll-root (z-10) so the
-          drawer chevron and other content inside scroll-root render above
-          the strip (they'd otherwise get captured by the strip's
-          backdrop-filter and end up blurred). The bands don't overlap
-          scroll-root spatially, so visibility is unaffected. The HUD
-          chrome itself sits at z-20 and renders on top of the strip. */}
+      {/* Frosted strips for the top + bottom HUD bands. z-[2] keeps them
+          below #scroll-root (z-10) so content inside isn't captured by
+          the backdrop-filter and blurred. */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-x-0 top-0 h-16 z-[2] frost border-b border-red-500/10"
@@ -256,16 +231,7 @@ export default function SceneBackdrop() {
         className="pointer-events-none fixed inset-x-0 bottom-0 h-12 z-[2] frost border-t border-red-500/10"
       />
 
-      {/* HUD chrome: fixed, sits above the canvas + scrim. The <main> scroll
-          container is constrained to bottom-20, so the bottom 80px of the
-          viewport is reserved for the HUD frame — section content physically
-          cannot scroll into it. No blur/gate needed. */}
       <div aria-hidden className="pointer-events-none fixed inset-0 z-[20]">
-        {/* Top HUD: persistent, lives in the reserved 48px top band of the
-            viewport (above #scroll-root). Signal Lock at left-14 to clear
-            the chevron toggle at left-3. L-corner brackets sit at top-12,
-            on the top edge of the #scroll-root content pane. Text labels
-            sit at top-5/6 to vertically center with the chevron's h-7 box. */}
         <div
           data-hud-section="top"
           className="transition-opacity duration-200 ease-out"
@@ -320,21 +286,10 @@ export default function SceneBackdrop() {
             </div>
           )}
 
-          {/* Horizontal divider sitting on the #scroll-root content pane
-              top edge (top-16). Spans BETWEEN the bracket horizontal strokes
-              so the line and brackets visually form one continuous frame
-              instead of overlapping in color. */}
           <div className="absolute inset-x-[50px] top-16 -translate-y-px h-px bg-white/10 md:inset-x-[66px]" />
         </div>
 
-        {/* Bottom HUD: persistent canonical footer (brackets + progress bar
-            + copyright). Always visible at every scroll position. */}
         <div>
-          {/* L-corner brackets sit on the bottom edge of the #scroll-root
-              content pane (which ends at bottom-12 = 48px from viewport
-              bottom). The L-corner aligns with the pane edge; the bracket
-              extends up into content, framing the pane. The progress bar +
-              persistent copyright sit below, in the 48px footer chrome. */}
           <div className="absolute bottom-12 left-6 text-blood-500 md:left-10">
             <HudFrame corner="bl" size={26} />
           </div>
@@ -342,8 +297,6 @@ export default function SceneBackdrop() {
             <HudFrame corner="br" size={26} />
           </div>
 
-          {/* Progress bar sits BETWEEN the bottom brackets at bottom-12,
-              the content pane's bottom edge — mirrors the top divider. */}
           <div className="absolute inset-x-[50px] bottom-12 h-px bg-white/10 md:inset-x-[66px]">
             <div
               ref={progressFillRef}
@@ -355,15 +308,12 @@ export default function SceneBackdrop() {
             />
           </div>
 
-          {/* Persistent copyright — single canonical footer line for the
-              whole site, replaces the per-page <Footer /> components. */}
           <div className="absolute inset-x-0 bottom-3 mx-6 text-center font-mono text-[10px] uppercase tracking-[0.28em] text-zinc-500 md:mx-10">
             &copy; {new Date().getFullYear()} Jetchomen Husain. All rights reserved.
           </div>
         </div>
       </div>
 
-      {/* Loading screen: fixed, covers everything until frames are ready. */}
       {!loaded && (
         <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-5 bg-abyss-900 px-6">
           <EyebrowBadge>DESCENT PROTOCOL // BOOTING</EyebrowBadge>

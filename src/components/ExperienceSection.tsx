@@ -85,8 +85,6 @@ export default function ExperienceSection() {
           </p>
         </div>
 
-        {/* Date rail on the left, role card on the right. Stacks to single
-            column on mobile with the date pill nested into the card. */}
         <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-x-8 gap-y-6 md:gap-y-10">
           {roles.map((role) => (
             <Fragment key={role.id}>
